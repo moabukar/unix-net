@@ -157,6 +157,9 @@ docker exec test_client curl -I http://webserver
 # optinola - you can specify your custom DNS server
 docker run -d --name dns_test --dns 8.8.8.8 --network mo_net alpine sleep 1000
 
+# use custom DNS for one container
+docker run --dns 8.8.8.8 nicolaka/netshoot nslookup google.com 
+
 ## cleanup
 docker rm -f webserver test_client webserver1 webserver2 webserver3 custom_webserver custom_client dns_test
 docker network rm mo_net my_custom_network my_second_network
