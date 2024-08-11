@@ -118,3 +118,48 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+## Advanced Docker networking
+
+```bash
+
+## You can inspect the network to see its configuration and connected containers.
+docker network inspect my_test_network
+
+## Create and Use a Custom Network with Specific Subnet:
+docker network create --subnet=192.168.1.0/24 my_custom_network ## a custom network with the subnet 192.168.1.0/24
+docker run -d --name custom_webserver --network my_custom_network nginx
+docker run -d --name custom_client --network my_custom_network alpine sleep 1000
+
+## If you have multiple instances of a service, Docker's DNS server can round-robin between them
+docker run -d --name webserver1 --network my_test_network nginx
+docker run -d --name webserver2 --network my_test_network nginx
+docker run -d --name webserver3 --network my_test_network nginx
+
+## use the test_client container to perform DNS resolution multiple times
+docker exec test_client nslookup webserver
+
+## Connecting Containers Across Multiple Networks - A container can be connected to multiple networks
+
+docker network create my_second_network
+docker network connect my_second_network test_client
+
+docker inspect test_client | grep "Networks" -A 20
+
+## Check net connectivvity
+
+docker exec test_client ping webserver
+docker exec test_client curl -I http://webserver
+
+# optinola - you can specify your custom DNS server
+docker run -d --name dns_test --dns 8.8.8.8 --network my_test_network alpine sleep 1000
+
+## cleanup
+docker rm -f webserver test_client webserver1 webserver2 webserver3 custom_webserver custom_client dns_test
+docker network rm my_test_network my_custom_network my_second_network
+
+# or do :
+docker network prune
+docker rm -f $(docker ps -a -q)
+docker image prune -a
+```
