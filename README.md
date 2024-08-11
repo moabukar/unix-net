@@ -124,10 +124,13 @@ Commercial support is available at
 ```bash
 
 ## You can inspect the network to see its configuration and connected containers.
+docker network create my_test_network # if cleaned up from earlier
 docker network inspect my_test_network
+
 
 ## Create and Use a Custom Network with Specific Subnet:
 docker network create --subnet=192.168.1.0/24 my_custom_network ## a custom network with the subnet 192.168.1.0/24
+docker inspect network my_custom_network # verify that your network has your specified CIDR
 docker run -d --name custom_webserver --network my_custom_network nginx
 docker run -d --name custom_client --network my_custom_network alpine sleep 1000
 
