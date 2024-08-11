@@ -200,3 +200,15 @@ docker container run -d --name frontend-app --network frontend nginx:latest
 docker network connect localhost frontend-app
 
 ```
+
+## Creating a svc and logging (docker swarm)
+
+```bash
+
+docker service create --name log-svc --replicas 3 -p 8080:80 nginx ## using docker swarm only (docker swarm init)
+curl localhost:8080
+
+docker service logs log-svc
+sudo journalctl -u docker
+
+```
