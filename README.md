@@ -44,6 +44,7 @@ Summary:
 - Create 2 containers in same net and ping them for a response. 
 
 ```bash
+docker network create my_network
 
 docker run -d --name container1 --network my_network nginx
 docker run -d --name container2 --network my_network alpine sleep 1000

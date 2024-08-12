@@ -1,0 +1,55 @@
+services:
+  service1:
+    image: nginx
+    container_name: container1
+    ports:
+      - 1234:1234
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/service1:/app/config  
+    networks:
+      - server-facing
+  
+  service2:
+    image: httpd
+    container_name: container2
+    ports:
+      - 5678:5678
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/service2:/app/config 
+    networks:
+      - server-facing
+      - web-facing
+      
+  service3:
+    image: nginx
+    container_name: container3
+    ports:
+      - 80:80
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/service3:/app/config
+    networks:
+      - server-facing
+      - web-facing
+      
+networks:
+  server-facing:
+    name: server-facing
+    ipam: 
+      config:
+        - subnet: 172.50.0.0/24
+        - gateway: 172.50.0.1 #optional
+  web-facing:
+    name: web-facing
+    ipam:
+      config:
+        - subnet: 172.51.0.0/24
+        - gateway: 172.51.0.1 #optional
