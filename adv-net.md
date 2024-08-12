@@ -172,3 +172,57 @@ hostname new-hostname
 lsof -i :80
 lsof -i tcp
 ```
+
+### arping
+
+- Sends ARP requests to test the reachability of hosts.
+
+```bash
+arping 192.168.1.1
+```
+
+
+### ncdu
+
+- Disk usage analyzer with an ncurses interface.
+
+```bash
+ncdu /
+```
+
+### vnstat
+
+- Network traffic monitor.
+
+```bash
+vnstat -l  # Live mode
+vnstat -d  # Daily statistics
+```
+
+### tshark
+
+- Command-line network protocol analyzer (part of the Wireshark suite).
+
+```bash
+tshark -i eth0
+tshark -r capture.pcap
+```
+
+### hping3
+
+- Network tool to send custom TCP/IP packets. (NOT MAINTAINED anymore)
+
+```bash
+hping3 -S -p 80 google.com
+hping3 --flood -V -u -p 80 google.com
+```
+
+### Other mentions
+
+- nload
+- nethogs
+- conntrack
+- ssdp
+- iw
+- iwlist
+- iwconfig
