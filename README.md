@@ -1,4 +1,4 @@
-# Docker & UNIX networking
+# UNIX & Containers (Docker) networking
 
 - [UNIX Networking](./unix-net.md)
 - [CGroups & Namespaces](./cgroups-ns.md)
