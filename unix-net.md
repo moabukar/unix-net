@@ -29,7 +29,6 @@ ip netns exec my_namespace ip link set lo up
 # Test connectivity between the default namespace and the new namespace.
 ip netns exec my_namespace ping 192.168.1.1
 
-
 ```
 
 

@@ -1,6 +1,7 @@
 # UNIX & Containers (Docker) networking
 
 - [UNIX Networking](./unix-net.md)
+- [UNIX Networking Troubleshoot & Advanced Networking Tools](./adv-net.md)
 - [CGroups & Namespaces](./cgroups-ns.md)
 - [Docker Networking](./README.md#theory)
 
