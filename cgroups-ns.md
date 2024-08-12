@@ -16,3 +16,8 @@ cat /proc/self/cgroup
 # listns
 ls -l /proc/$$/ns
 ```
+
+
+## Adding new namespace
+
+`unshare --pid --fork --mount-proc bash`
