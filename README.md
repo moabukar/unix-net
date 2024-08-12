@@ -8,5 +8,8 @@ Repo documenting all my networking in the unix, containers and k8s space.
 - [Docker Networking](./docker-net.md)
 - [K8s Networking](./k8s-net.md)
 - [AWS Networking](./aws-net.md)
+    - [AWS Networking Basics](./aws/aws-net.md)
+    - [AWS Networking Labs](./aws/aws-net-labs.md)
+    - [EC2 Networking](./aws/ec2-net.md)
 
 If you think of anything useful, please feel free to make a PR and add or raise an issue 🙏
