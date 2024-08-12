@@ -1,6 +1,6 @@
 # AWS Networking
 
-- AWS networking topics
+- AWS networking
 
 ### Virtual Private Cloud (VPC)
 
@@ -12,6 +12,13 @@ aws ec2 create-vpc --cidr-block 10.0.0.0/16
 
 # Creating Subnets:
 aws ec2 create-subnet --vpc-id <vpc-id> --cidr-block 10.0.1.0/24
+
+# Associating a Route Table with a Subnet. 
+aws ec2 associate-route-table --subnet-id <subnet-id> --route-table-id <route-table-id>
+
+
+# Creating a Route in the route table
+aws ec2 create-route --route-table-id <route-table-id> --destination-cidr-block 0.0.0.0/0 --gateway-id <igw-id>
 
 ```
 
