@@ -15,7 +15,8 @@ RUN apk update && \
         strace \
         tcpdump \
         htop \
-        iperf
+        iperf \
+        iproute2
 
 COPY entrypoint.sh /entrypoint.sh
 
