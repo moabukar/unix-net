@@ -46,10 +46,11 @@ ip netns exec my_namespace ping 192.168.10.1
 
 ```
 
-## Network performance
+## Network performance testing
 
 ```bash
 
+# Run iperf in server mode in one container and client mode in another to test network performance.
 iperf -s   # In server container
 iperf -c <server_ip>  # In client container
 
@@ -57,6 +58,4 @@ iperf -c <server_ip>  # In client container
 # Capture Packets and analyse traffic
 
 tcpdump -i eth0
-
-
 ```
