@@ -1,0 +1,89 @@
+services:
+  app1:
+    image: image1
+    container_name: app1
+    ports:
+      - 1234:1234
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/app1:/app/config  
+    networks:
+      - web
+      - db
+      
+  app1-db:
+    image: image1-a
+    container_name: app1-db
+    ports:
+      - 2234:2234
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/app1/db:/app/config  
+    networks:
+      - db
+  
+  app2:
+    image: image2
+    container_name: app2
+    ports:
+      - 5678:5678
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/app2:/app/config 
+    networks:
+      - isolated
+      
+  app3:
+    image: image3
+    container_name: container3
+    ports:
+      - 80:80
+    environment:
+      - PUID=1000
+      - PGID=100
+    volumes:
+      - /volume1/docker/service3:/app/config
+    networks:
+      - web
+      - mcnetface
+      
+networks:
+  web:
+    name: web
+    ipam: 
+      config:
+        - subnet: 172.50.0.0/24
+        - gateway: 172.50.0.1 #optional
+  db:
+    name: db
+    ipam:
+      config:
+        - subnet: 172.51.0.0/24
+        - gateway: 172.51.0.1 #optional
+  isolated:
+    name: isolated
+    ipam:
+      config:
+        - subnet: 172.52.0.0/30
+        - gateway: 172.52.0.1 #optional
+  mcnetface:
+    external: true
+
+##
+networks:
+  macvlan:
+    name: network_name
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "192.168.0.0/24"
+          ip_range: "192.168.0.64/26"
+          gateway: "192.168.0.1"
