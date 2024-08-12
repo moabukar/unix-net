@@ -2,6 +2,17 @@
 
 Repo documenting all my networking in the unix, containers and k8s space.
 
+Note: converting markdown files to pdf:
+
+```bash
+brew install pandoc
+brew install wkhtmltopdf # or brew install weasyprint
+
+pandoc docker-net.md -o docker-net.pdf --pdf-engine=wkhtmltopdf ## using wkhtmltopdf
+# alt
+pandoc k8s-net.md -o k8s-net.pdf --pdf-engine=weasyprint ## using weasyprint
+```
+
 - [Networking Basics](./net-theory/basics.md)
     - [DNS](./net-theory/dns.md)
     - [NAT](./net-theory/nat.md)
