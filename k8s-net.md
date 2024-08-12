@@ -2,6 +2,87 @@
 
 - All things networking in the k8s space
 
+
+### Pod to pod comms
+
+```bash
+
+kubectl run nginx --image=nginx
+kubectl run apache --image=httpd
+
+
+kubectl get pod -o wide
+
+kubectl exec --it nginx -- sh
+
+curl <Apache_POD_IP>
+
+
+## exit pod
+
+kubectl logs apache
+
+# You should see the IP of the nginx pod IP making requests. This is because pods in the same cluster (if no network pols are defined) can communicate by default
+
+```
+
+### DNS & Service discovery
+
+
+```bash
+
+kubectl create deployment website --replicas=1 --image=httpd
+kubectl expose deployment website --port=80
+
+kubectl run -it client --image busybox
+
+wget -qO - website ## (use capital o "O", not zero/0)
+
+wget -qO - website.default
+wget -qO - website.default.svc.cluster.local
+
+cat /etc/resolv.conf
+
+###
+search default.svc.cluster.local svc.cluster.local cluster.local ok4igb2s51uerbsb5uc1zxhnfb.zx.internal.cloudapp.net
+nameserver 10.1.0.10
+options ndots:5
+
+## nameservers 10.1.0.10 is the IP of the default K8s service called "kubernetes" when you do `kubectl get svc`
+
+## It's our cluster DNS service. Services give dynamic sets of pods a stable "head" identity.
+
+## nslookup & dig
+
+/ # nslookup echo-server.default.svc.cluster.local
+Server:		10.1.0.10
+Address:	10.1.0.10:53
+
+Name:	echo-server.default.svc.cluster.local
+Address: 10.1.135.254
+
+/ # nslookup website.default.svc.cluster.local
+Server:		10.1.0.10
+Address:	10.1.0.10:53
+
+Name:	website.default.svc.cluster.local
+Address: 10.1.180.30
+
+```
+
+
+### Headless labs
+
+```bash
+
+## Ignoring the failed lookups, you can see that looking up a headless service by name actually returns the IP addresses of the endpoints.
+
+## You can also retrieve the SRV record for the service:
+
+nslookup -q=SRV headlesswebsite
+
+```
+
 ### DNS Lookups in Services
 
 - Kubernetes uses a DNS server to provide service discovery for pods
