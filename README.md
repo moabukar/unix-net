@@ -1,4 +1,4 @@
-# UNIX & Containers (Docker) networking
+# UNIX networking (unix, containers, k8s etc)
 
 Repo documenting all my networking in the unix, containers and k8s space.
 
