@@ -2,6 +2,9 @@
 
 Repo documenting all my networking in the unix, containers and k8s space.
 
+- [Networking Basics](./net-theory/basics.md)
+    - [DNS](./net-theory/dns.md)
+    - [NAT](./net-theory/nat.md)
 - [UNIX Networking](./unix-net.md)
 - [UNIX Networking Troubleshoot & Advanced Networking Tools](./adv-net.md)
 - [CGroups & Namespaces](./cgroups-ns.md)
