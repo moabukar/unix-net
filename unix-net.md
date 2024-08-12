@@ -4,6 +4,7 @@
 - Note: Use dockerfile in root for testing the below
 
 ```bash
+cd docker
 docker build -t container-unix .
 docker run -it --privileged --name container-unix container-unix /bin/sh
 ```
