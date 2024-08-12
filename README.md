@@ -15,4 +15,11 @@ Repo documenting all my networking in the unix, containers and k8s space.
     - [AWS Networking Labs](./aws/aws-net-labs.md)
     - [EC2 Networking](./aws/ec2-net.md)
 
+
+TODO
+- [] Security
+- [] Firewalls
+- [] Azure Networking
+- [] GCP Networking
+ 
 If you think of anything useful, please feel free to make a PR and add or raise an issue 🙏
