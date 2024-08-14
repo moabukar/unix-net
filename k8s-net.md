@@ -29,6 +29,36 @@ kubectl logs apache
 ### DNS & Service discovery
 
 
+```mermaid
+graph TD
+    subgraph Kubernetes Cluster
+        A[Client Pod]
+        B[Website Deployment]
+        C[DNS Server - 10.1.0.10]
+
+        A -->|wget website| SVC[Website Service]
+        A -->|wget website.default| C
+        A -->|wget website.default.svc.cluster.local| C
+        A -->|nslookup website.default.svc.cluster.local| C
+        C -->|response with IP| A
+        B -->|Exposes on port 80| SVC
+    end
+
+    subgraph DNS Resolution
+        R[resolv.conf]
+        R -->|search domain| DNS[default.svc.cluster.local]
+        DNS -->|Nameserver IP| C
+    end
+
+    Note1[Note: DNS server IP 10.1.0.10 resolves service names to IP addresses]
+    Note2[Note: resolv.conf contains DNS search domains and nameserver]
+
+    Note1 --> Kubernetes_Cluster
+    Note2 --> DNS_Resolution
+
+
+```
+
 ```bash
 
 kubectl create deployment website --replicas=1 --image=httpd
