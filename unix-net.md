@@ -11,6 +11,27 @@ docker run -it --privileged --name container-unix container-unix /bin/sh
 
 ## Custom network namespace in UNIX
 
+```mermaid
+graph TD
+    subgraph Default Namespace
+        A[Default Namespace]
+        veth0
+        veth0 --> B[192.168.1.1/24]
+        veth0 --> veth1
+    end
+
+    subgraph New Namespace
+        A1[my_namespace]
+        veth1 --> B1[192.168.1.2/24]
+        veth1 --> lo
+        lo[Loopback Interface] --> lo_up[up]
+    end
+
+    veth0 -->|virtual ethernet link| veth1
+    A1 -->|ping| A
+    A -->|response| A1
+```
+
 ```bash
 # Create a new network namespace using ip netns.
 ip netns add my_namespace
@@ -34,6 +55,35 @@ ip netns exec my_namespace ping 192.168.1.1
 
 
 ## VLANs
+
+```mermaid
+graph TD
+    subgraph Default Namespace
+        A[Default Namespace]
+        veth0
+        veth0 --> B[192.168.1.1/24]
+        veth0 --> veth1
+        veth0.10[VLAN Interface veth0.10]
+        veth0.10 --> C[192.168.10.1/24]
+    end
+
+    subgraph New Namespace
+        A1[my_namespace]
+        veth1 --> B1[192.168.1.2/24]
+        veth1 --> lo
+        lo[Loopback Interface] --> lo_up[up]
+        veth1.10[VLAN Interface veth1.10]
+        veth1.10 --> C1[192.168.10.2/24]
+    end
+
+    veth0 -->|virtual ethernet link| veth1
+    A1 -->|ping| A
+    A -->|response| A1
+
+    veth0.10 -->|VLAN id=10| veth1.10
+    A1 -->|ping over VLAN| veth0.10
+    veth0.10 -->|response| A1
+```
 
 ```bash
 
