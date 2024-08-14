@@ -40,6 +40,28 @@ Summary:
 
 ### Basic test
 
+```mermaid
+graph TD
+    subgraph my_network
+        A[container1]
+        B[container2]
+        A -->|ping| B
+        B -->|response| A
+    end
+
+    subgraph different_network
+        C[container3]
+        D[container4]
+        C -.->|ping| D
+        D -.->|no response| C
+    end
+
+    note[Note: my_network is a Docker bridge network created using `docker network create my_network`]
+    note2[Note: different_network is a hypothetical network for the opposite test]
+    note --> my_network
+    note2 --> different_network
+```
+
 - Create 2 containers in same net and ping them for a response. 
 
 ```bash
