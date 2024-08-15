@@ -347,7 +347,7 @@
         - you can build a gRPC web proxy, where you can point your web app to the gRPC proxy and proxy will convert them into an actual gRPC course (like a sidecar pattern)
     - error handling (need to build your own, no native one)
     - no native browser support
-        - (gRPC is entrenched to HTTP/2, uses low level calls to HTTP/2 streams
+        - (gRPC is entrenched to HTTP/2, uses low level calls to HTTP/2 streams)
         - those APIs dont exist in the browser because hte browser doesn’t expose them
         - 
     - timeouts (pub/sub)
