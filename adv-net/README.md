@@ -83,3 +83,15 @@ This simplification can lead to more efficient resource usage, both in terms of 
 - QUIC is designed to overcome the limitations of TCP+TLS by reducing latency, avoiding head-of-line blocking, allowing connections to survive network changes, and improving performance on modern networks.
 - TLS over TCP remains reliable but comes with the baggage of additional round-trip times for connection setup, head-of-line blocking, and difficulty handling network transitions smoothly.
 ```
+
+### Why TCP congestion control is problem and how we can remove that
+
+- TCP congestion control has been crucial in maintaining internet stability, but it faces challenges in modern, diverse network environments. By using alternatives like QUIC, advanced congestion control algorithms, multipath networking, and hybrid strategies, we can mitigate or even remove some of these limitations, leading to better performance, especially in high-speed, high-latency, or mobile networks.
+
+### Http1.2 vs 1.3. Carrying Http over UDP?
+
+Why HTTP/3 (over UDP) is an Improvement
+
+- Reduced Latency: The primary advantage of HTTP/3 is its significantly reduced latency, achieved by eliminating multiple round trips needed for connection establishment and avoiding head-of-line blocking.
+- Better Performance in Real-World Conditions: HTTP/3 is particularly advantageous in real-world conditions like lossy networks, mobile networks, and networks with fluctuating latency.
+- Future-Proofing: As the web evolves, the ability of HTTP/3 to adapt more quickly and efficiently to diverse network environments makes it more future-proof compared to its predecessors.
