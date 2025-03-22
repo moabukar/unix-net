@@ -29,6 +29,28 @@ Then you have all of this magic happening etc. And with containers, you have rel
 
 And that's where Kubernetes comes in. 
 
-## Pod Networking
+## Pod Architecture
 
-- Running a container 
+- Running a container under Docker places that container in its own private network namespace by default.
+- Kubernetes collects sets of containers in Pods.
+- All the containers in a pod share the same network namespace.
+
+### Pod Networking
+
+- All pods are assigned their own unique IP address.
+- Nodes run a root network namespaces that bridges between the pod interfaces. This allows all pods to communicate with each other using their IP addresses, regardless of the node they are running on.
+- Communication does not depend on NAT so less complexity and portability.
+- Pods are assigned their own network namespaces and interfaces. All communication with pods go through their assigned interfaces.
+- The cluster-level network layer maps the Node-level namespaces, allowing traffic to be correctly routed across Nodes.
+- Most K8s networking plugins support IPAM.
+
+## DNS in K8s
+
+- K8s clusters built-in DNS support. CoreDNS is the most popular DNS server for K8s and comes enabled by default in many k8s distributions.
+
+K8s automatically assigns DNS names to pods and services like this:
+
+- Pod – `pod-ip-address.pod-namespace-name.pod.cluster-domain.example` (e.g. `10.244.0.1.my-app.svc.cluster.local`)
+- Service – `service-name.service-namespace-name.svc.cluster-domain.example` (e.g. `database.my-app.svc.cluster.local`)
+
+The applications running in your Pods should usually be configured to communicate with Services using their DNS names. Names are predictable, whereas a Service’s IP address will change if the Service is deleted and then replaced.
