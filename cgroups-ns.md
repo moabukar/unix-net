@@ -5,7 +5,7 @@
 ```bash
 docker build -t cgroups-namespaces-lab .
 
-docker run -it --rm --name lab_container --privileged cgroups-namespaces-lab
+docker run -it --rm --name lab_container --privileged cgroups-namespaces-lab -- bash
 
 # inside container
 

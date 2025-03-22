@@ -13,6 +13,14 @@ pandoc docker-net.md -o docker-net.pdf --pdf-engine=wkhtmltopdf ## using wkhtmlt
 pandoc k8s-net.md -o k8s-net.pdf --pdf-engine=weasyprint ## using weasyprint
 ```
 
+## Base image for labs
+
+```bash
+cd docker
+docker build -t container-unix .
+docker run -it --privileged --name container-unix container-unix /bin/sh
+```
+
 - [Networking Basics](./net-theory/basics.md)
     - [DNS](./net-theory/dns.md)
     - [NAT](./net-theory/nat.md)

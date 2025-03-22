@@ -16,7 +16,9 @@ RUN apk update && \
         tcpdump \
         htop \
         iperf \
-        iproute2
+        iproute2 \
+        net-tools \
+        iptables 
 
 COPY entrypoint.sh /entrypoint.sh
 
