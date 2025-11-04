@@ -40,7 +40,6 @@ ip link
 
 ```
 
-
 ## Create new mount namespace
 
 `unshare --mount bash`
